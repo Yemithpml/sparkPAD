@@ -1,6 +1,6 @@
 import SideBar from "@/components/SideBar";
 
-export default function Dashboard() {
+export default function Page() {
   return (
     <div className="flex">
       <SideBar />
