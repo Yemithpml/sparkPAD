@@ -1,74 +1,78 @@
-import Link from "next/link";
+"use client"
 
-function SideBar() {
+import Link from "next/link"
+import { useState } from "react"
+import { Menu, X } from "lucide-react"
+
+export default function Sidebar() {
+  const [open, setOpen] = useState(false)
+
   return (
-    <aside className="w-64 h-screen bg-white border-r border-gray-200 flex flex-col justify-between p-6">
+    <>
+      {/* Mobile Menu Button */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 bg-white p-2 rounded-lg shadow"
+        onClick={() => setOpen(true)}
+      >
+        <Menu size={20} />
+      </button>
 
-      {/* Top Section */}
-      <div>
-        <h2 className="text-xl font-semibold text-gray-900">SparkPad</h2>
-        <p className="text-sm text-gray-400 mt-1 mb-6">Your second brain</p>
+      {/* Overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          onClick={() => setOpen(false)}
+        />
+      )}
 
-        <nav>
-          <ul className="space-y-4">
+      <aside
+        className={`fixed md:static top-0 left-0 h-screen w-64 bg-white border-r
+        flex flex-col justify-between p-6 z-50 transform
+        ${open ? "translate-x-0" : "-translate-x-full"}
+        md:translate-x-0 transition-transform`}
+      >
+        {/* Close button mobile */}
+        <div className="md:hidden flex justify-end">
+          <X onClick={() => setOpen(false)} />
+        </div>
 
-            <li>
-              <Link href="/" className="text-gray-800 font-medium hover:text-purple-600">
-                Dashboard
-              </Link>
-            </li>
+        {/* Logo */}
+        <div>
+          <h2 className="text-xl font-bold">SparkPad</h2>
+          <p className="text-gray-400 text-sm mb-6">Your second brain</p>
 
-            <li>
-              <Link href="/all-thoughts" className="text-gray-800 font-medium hover:text-purple-600">
-                All Thoughts
-              </Link>
-            </li>
+          <nav className="space-y-4">
+            <Link href="/" className="block font-medium text-purple-600">
+              Dashboard
+            </Link>
 
-            <li>
-              <Link href="/favorites" className="text-gray-800 font-medium hover:text-purple-600">
-                Favorites
-              </Link>
-            </li>
+            <Link href="/all-thoughts" className="block text-gray-700">
+              All Thoughts
+            </Link>
 
-            <li>
-              <Link href="/tags" className="text-gray-800 font-medium hover:text-purple-600">
-                Tags
-              </Link>
-            </li>
+            <Link href="/favorites" className="block text-gray-700">
+              Favorites
+            </Link>
 
-            <li>
-              <Link href="/analytics" className="text-gray-800 font-medium hover:text-purple-600">
-                Analytics
-              </Link>
-            </li>
+            <Link href="/tags" className="block text-gray-700">
+              Tags
+            </Link>
 
-          </ul>
-        </nav>
-      </div>
+            <Link href="/analytics" className="block text-gray-700">
+              Analytics
+            </Link>
+          </nav>
+        </div>
 
-      {/* Footer Section */}
-      <footer className="border-t border-gray-200 pt-4">
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4">
-          <p className="text-sm font-medium text-gray-900 mb-1">
-            💡 Quick Tip
-          </p>
-
-          <p className="text-xs text-gray-600">
-            Press{" "}
-            <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-300">
-              ⌘
-            </kbd>{" "}
-            +{" "}
-            <kbd className="px-1.5 py-0.5 bg-white rounded border border-gray-300">
-              K
-            </kbd>{" "}
-            to quickly capture thoughts
+        {/* Footer Tip */}
+        <div className="bg-purple-50 rounded-lg p-4 text-sm">
+          <p className="font-semibold">💡 Quick Tip</p>
+          <p className="text-gray-600 text-xs mt-1">
+            Press <kbd className="border px-1 rounded">⌘</kbd> +
+            <kbd className="border px-1 rounded">K</kbd> to capture thoughts
           </p>
         </div>
-      </footer>
-
-    </aside>
-  );
+      </aside>
+    </>
+  )
 }
-
-export default SideBar;

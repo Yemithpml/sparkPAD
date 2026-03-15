@@ -1,41 +1,65 @@
-import SideBar from "@/components/SideBar";
+import Sidebar from "@/components/SideBar"
+import ThoughtCard from "@/components/ThoughtCard"
+import ThoughtInput from "@/components/ThoughtInput"
 
-export default function Page() {
+export default function Home() {
   return (
-    <div className="flex">
-      <SideBar />
+    <div className="flex min-h-screen bg-gray-50">
 
-      <div className="min-h-screen bg-gray-100 p-6 flex-1">
-        
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">
-            Welcome back!
+      <Sidebar />
+
+      <main className="flex-1 p-6 md:p-10">
+
+        {/* Welcome Section */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">
+            Welcome back! ✨
           </h1>
-          <p className="text-gray-400">{"What's on your mind today"}</p>
+
+          <p className="text-gray-500 mt-1">
+            What's on your mind today?
+          </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        {/* Thought Input */}
+        <ThoughtInput />
 
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h2 className="text-xl font-semibold">Users</h2>
-            <p className="text-3xl font-bold text-blue-500">1,250</p>
-          </div>
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search thoughts..."
+          className="w-full border rounded-xl p-3 mb-8"
+        />
 
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h2 className="text-xl font-semibold">Revenue</h2>
-            <p className="text-3xl font-bold text-green-500">$8,420</p>
-          </div>
+        {/* Recent Thoughts */}
+        <h2 className="font-semibold text-lg mb-4">
+          Recent Thoughts
+        </h2>
 
-          <div className="bg-white p-6 rounded-xl shadow">
-            <h2 className="text-xl font-semibold">Orders</h2>
-            <p className="text-3xl font-bold text-purple-500">420</p>
-          </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <ThoughtCard
+            title="Build a second brain app"
+            text="Create a productivity tool that helps capture random thoughts quickly."
+            tag="Idea"
+          />
+
+          <ThoughtCard
+            title="Learn React Server Components"
+            text="Deep dive into RSC architecture and streaming."
+            tag="Learning"
+          />
+
+          <ThoughtCard
+            title="Refactor API endpoints"
+            text="Optimize database queries and error handling."
+            tag="Coding"
+          />
 
         </div>
 
-      </div>
+      </main>
+
     </div>
-  );
+  )
 }
